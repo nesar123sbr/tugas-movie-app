@@ -14,14 +14,14 @@ export default function App() {
     axios(apiurl + "&s=" + state.s).then(({ data }) => {
       let results =data.Search;
       
-      setState(prevState =>{
+      setState(prevState => {
         return { ...prevState, results: results }
       })
     })
   }
 
 const openPopup = id => {
-  axios(apiurl + "&i" + id).then(({data}) => {
+  axios(apiurl + "&i" + id).then(({ data }) => {
     let result = data;
     
     console.log(result);
@@ -36,7 +36,6 @@ const openPopup = id => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Movie DB</Text>
-      
       <TextInput 
         style={styles.searchbox}
         onChangeText={text => setState(prevState => {
@@ -57,6 +56,7 @@ const openPopup = id => {
                   height: 300,
                   marginHorizontal: 'auto'
                 }}
+                resizeMode="cover"
               />
               <Text style={styles.heading}>{result.Title}</Text>
             </View>
@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
   closeBtn: {
     padding: 20,
     fontSize: 20,
+    color: '#FFF',
     fontWeight: '700',
     backgroundColor: '#2484C4'
   }
