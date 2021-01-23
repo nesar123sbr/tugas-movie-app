@@ -20,7 +20,7 @@ export default function App() {
     })
   }
 
-const openPopup = IDBCursor => {
+const openPopup = id => {
   axios(apiurl + "&i" + id).then(({data}) => {
     let result = data;
     
@@ -70,10 +70,17 @@ const openPopup = IDBCursor => {
         visible={(typeof state.selected.Title != "undefined")}
       >
         <View style={styles.popup}>
-          <Text style={styles.poptitle}>Hello, World!</Text>
+          <Text style={styles.poptitle}>{state.selected.Title}</Text>
           <Text style={{marginBottom:20}}>Rating: {state.selected.imdbRating}</Text>
           <Text>{state.selected.Plot}</Text>
         </View>
+        <TouchableHighlight
+          onPress={() => setState(prevState => {
+            return { ...prevState, selected: {} }
+          }) }
+        >
+          <Text style={styles.closeBtn}>Close</Text>
+        </TouchableHighlight>
       </Modal>
     </View>
   );
@@ -118,6 +125,20 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     padding: 20,
     backgroundColor: '#445565'
+  },
+  popup: {
+    padding: 20
+  },
+  poptitle: {
+    fontSize: 24,
+    fontWeight: '700',
+    marginBottom: 5
+  },
+  closeBtn: {
+    padding: 20,
+    fontSize: 20,
+    fontWeight: '700',
+    backgroundColor: '#2484C4'
   }
 
 });
